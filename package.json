@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "serve": "node server",
-    "start": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"node server\" \"ng build --watch\"",
+    "start-dev": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"nodemon server\" \"ng build --watch\"",
+    "start": "node server",
+    "postinstall": "ng build --aot -prod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
