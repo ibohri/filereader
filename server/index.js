@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const routes = require("./config/route-registry");
-const distDir = './dist';
+const distDir = '../../dist';
 const cors = require("cors");
 
 app.use(cors());
