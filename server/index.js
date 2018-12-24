@@ -5,7 +5,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const routes = require("./config/route-registry");
 const distDir = '../dist';
+const cors = require("cors");
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
