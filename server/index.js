@@ -19,6 +19,6 @@ app.use(/^((?!(api)).)*/, (req, res) => {
 
 // register the routes
 app.use("/api", routes);
-
-app.listen(4040, () => console.log("Express listening on port 4040"));
+const port = process.env.PORT || 4040;
+app.listen(port, () => console.log("Express listening on port " + port));
 module.exports = app;
