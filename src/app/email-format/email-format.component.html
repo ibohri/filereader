@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Email Format</h2>
+<mat-dialog-content>
+  <div style="display:flex;flex-direction:row;">
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Column">
+        <mat-option *ngFor="let col of data" [value]="col">
+          {{ col }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
