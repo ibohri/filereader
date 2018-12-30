@@ -1,0 +1,5 @@
+.container {
+  height: calc(100% - 92px);
+  position: absolute;
+  width: calc(100% - 28px);
+}

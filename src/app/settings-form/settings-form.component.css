@@ -1,0 +1,17 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.form-container > * {
+  width: 100%;
+}
+
+.save-btn {
+  margin-right: 10px;
+}
+
+.button-container {
+  margin-top: 10px;
+}

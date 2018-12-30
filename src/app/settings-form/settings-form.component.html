@@ -1,0 +1,75 @@
+<form
+  #emailSettings="ngForm"
+  (ngSubmit)="updateSettings(emailSettings)"
+  class="form-container"
+>
+  <mat-form-field>
+    <input
+      id="from"
+      name="from"
+      [(ngModel)]="settings.from"
+      [formControl]="emailFormControl"
+      matInput
+      placeholder="From"
+      required
+      [errorStateMatcher]="matcher"
+    />
+    <mat-error
+      *ngIf="
+        emailFormControl.hasError('email') &&
+        !emailFormControl.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      required
+      name="password"
+      [(ngModel)]="settings.password"
+      placeholder="Enter your password"
+      [type]="hide ? 'password' : 'text'"
+    />
+    <mat-icon matSuffix (click)="hide = !hide">{{
+      hide ? "visibility_off" : "visibility"
+    }}</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      id="subject"
+      required
+      [(ngModel)]="settings.subject"
+      name="subject"
+      matInput
+      placeholder="Subject"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      id="body"
+      name="body"
+      matInput
+      required
+      [(ngModel)]="settings.body"
+      placeholder="Body"
+      rows="10"
+    ></textarea>
+    <mat-hint>{{ note }}</mat-hint>
+  </mat-form-field>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      [disabled]="!emailSettings.valid"
+      class="save-btn"
+      color="primary"
+    >
+      Save
+    </button>
+    <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+  </div>
+</form>

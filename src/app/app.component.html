@@ -1,1 +1,13 @@
-<div class="container"><app-file-upload></app-file-upload></div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a mat-button routerLink=".">Home</a>
+    <app-file-upload></app-file-upload>
+    <span class="example-spacer"></span>
+    <a mat-button routerLink="settings">
+      <mat-icon class="example-icon">settings</mat-icon></a
+    >
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container" style="padding:10px; ">
+  <router-outlet></router-outlet>
+</div>

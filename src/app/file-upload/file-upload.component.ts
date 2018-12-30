@@ -1,8 +1,10 @@
-import { EmailFormatDialog } from "./../email-format/email-format.component";
-import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs/internal/Observable";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FileUploader, FileUploaderOptions, FileItem } from "ng2-file-upload";
 import { GridOptions } from "ag-grid-community";
 import { MatDialog } from "@angular/material/dialog";
+import { FileService } from "src/app/file.service";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-file-upload",
   templateUrl: "./file-upload.component.html",
@@ -10,10 +12,10 @@ import { MatDialog } from "@angular/material/dialog";
 })
 export class FileUploadComponent implements OnInit {
   uploader: FileUploader;
-  data: any;
-  gridOptions: GridOptions;
 
-  constructor(private dialog: MatDialog) {}
+  @Output() onfilechange: EventEmitter<any> = new EventEmitter();
+
+  constructor(private fileService: FileService, private router: Router) {}
 
   ngOnInit() {
     this.uploader = new FileUploader({
@@ -23,42 +25,11 @@ export class FileUploadComponent implements OnInit {
     });
 
     this.uploader.onSuccessItem = this.onSuccessItem;
-
-    this.gridOptions = <GridOptions>{
-      columnDefs: this.getColumnDefs(),
-      rowData: this.data || [],
-      context: {
-        componentParent: this
-      },
-      enableColResize: true
-    };
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(EmailFormatDialog, {
-      width: "70%",
-      height: "75%",
-      data: this.getColumnDefs().map(t => t.headerName)
-    });
-  }
-
-  getColumnDefs(): Array<any> {
-    if (this.data && this.data.length) {
-      return Object.keys(this.data[0]).map(d => {
-        return {
-          headerName: d,
-          field: d
-        };
-      });
-    }
-    return [];
   }
 
   onSuccessItem = (item: FileItem, response: string, status: number) => {
-    this.data = JSON.parse(response);
-
-    this.gridOptions.api.setColumnDefs(this.getColumnDefs());
-    this.gridOptions.api.setRowData(this.data);
-    this.gridOptions.api.sizeColumnsToFit();
+    const data = JSON.parse(response);
+    this.fileService.updateFileData(data);
+    this.router.navigate(["/"]);
   };
 }

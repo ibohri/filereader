@@ -1,6 +1,7 @@
+import { EmailSettingsService } from "./settings.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FileUploadModule, FileSelectDirective } from "ng2-file-upload";
 import { AppComponent } from "./app.component";
 import { FileUploadComponent } from "./file-upload/file-upload.component";
@@ -10,10 +11,37 @@ import { EmailFormatDialog } from "./email-format/email-format.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSelectModule } from "@angular/material/select";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material";
+import { MatInputModule, MatIconModule } from "@angular/material";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { RouterModule, Routes } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { FileGridComponent } from "./file-grid/file-grid.component";
+import { MatTableModule } from "@angular/material/table";
+import { SettingsFormComponent } from "./settings-form/settings-form.component";
+import { HttpClientModule } from "@angular/common/http";
+const routes: Routes = [
+  {
+    path: "",
+    component: FileGridComponent
+  },
+  {
+    path: "grid",
+    component: FileGridComponent
+  },
+  {
+    path: "settings",
+    component: SettingsFormComponent
+  }
+];
 
 @NgModule({
-  declarations: [AppComponent, FileUploadComponent, EmailFormatDialog],
+  declarations: [
+    AppComponent,
+    FileUploadComponent,
+    EmailFormatDialog,
+    FileGridComponent,
+    SettingsFormComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -23,9 +51,16 @@ import { MatInputModule } from "@angular/material";
     BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })
   ],
-  providers: [],
+  providers: [EmailSettingsService],
   bootstrap: [AppComponent],
   entryComponents: [EmailFormatDialog]
 })
