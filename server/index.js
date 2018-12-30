@@ -6,6 +6,11 @@ const cookieParser = require("cookie-parser");
 const routes = require("./routes/route-registry");
 const distDir = "../dist";
 const cors = require("cors");
+const fs = require("fs");
+const constants = require("./constants");
+if (!path.existsSync(constants.fileUploadPath)) {
+  fs.mkdirSync(constants.fileUploadPath, 0744);
+}
 
 app.use(cors());
 app.use(bodyParser.json());
