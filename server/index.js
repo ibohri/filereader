@@ -8,7 +8,7 @@ const distDir = "../dist";
 const cors = require("cors");
 const fs = require("fs");
 const constants = require("./constants");
-if (!path.existsSync(constants.fileUploadPath)) {
+if (!fs.existsSync(constants.fileUploadPath)) {
   fs.mkdirSync(constants.fileUploadPath, 0744);
 }
 
