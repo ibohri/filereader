@@ -14,11 +14,7 @@ import { FormErrorStateMatcher } from "src/app/error-state-matcher";
 export class SettingsFormComponent implements OnInit {
   note = "Add column name in {} for ex: {column_name}";
   hide = true;
-  settings = {
-    from: "",
-    subject: "",
-    body: ""
-  };
+  settings = {};
   emailFormControl = new FormControl("", [
     Validators.required,
     Validators.email
