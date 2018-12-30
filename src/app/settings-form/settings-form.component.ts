@@ -1,5 +1,5 @@
 import { Router } from "@angular/router";
-import { EmailSettingsService, EmailSetting } from "./../settings.service";
+import { EmailSettingsService } from "./../settings.service";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { FormControl } from "@angular/forms";
@@ -14,7 +14,7 @@ import { FormErrorStateMatcher } from "src/app/error-state-matcher";
 export class SettingsFormComponent implements OnInit {
   note = "Add column name in {} for ex: {column_name}";
   hide = true;
-  settings: EmailSetting = {
+  settings = {
     from: "",
     subject: "",
     body: ""
